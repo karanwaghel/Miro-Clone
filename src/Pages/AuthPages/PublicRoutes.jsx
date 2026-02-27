@@ -1,12 +1,12 @@
 import { useAuth } from '@/ComponentProject/AuthContext/Auth';
 import { Navigate } from 'react-router-dom';
-import { Spinner } from '@/components/ui/spinner';
+import LoadingSpinner from './Spinner';
 
  function ProtectedRoute({children}) {
 
     const {CurrentUser,Loading} = useAuth();
 
-    if(Loading) return <Spinner/>
+    if(Loading) return <LoadingSpinner/>
 
     if(CurrentUser){
         return <Navigate to={'/'} replace/>        
