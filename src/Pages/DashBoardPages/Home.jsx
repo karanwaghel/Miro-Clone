@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
 
-    const {LogOut} = useAuth();
+    const {LogOut,Loading} = useAuth();
     const nav = useNavigate();
 
     const handelLogout = async ()=>{

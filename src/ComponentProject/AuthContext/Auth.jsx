@@ -1,6 +1,5 @@
 import {createContext, useContext, useEffect, useState } from "react";
 import {auth, GoogleProvider } from "../config/firebase";
-import {Firestore} from "firebase/firestore"
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -15,20 +14,24 @@ export const AuthContext = createContext();
 
 export const useAuth = ()=>{
   return useContext(AuthContext)
-} 
+}   
 
 function AuthProvider({children}){
 
   const [CurrentUser,setCurrentUser] = useState(null);
+  const [Loading,setLoading] = useState(true)
 
 
   useEffect(()=>{
     const Unsubscribe = onAuthStateChanged(auth,(user)=>{
       setCurrentUser(user);
+      setLoading(false);
     });
       return Unsubscribe;
     
   },[])
+
+
 
   const handleForgotPassword = async({email})=>{
     try{
@@ -95,6 +98,7 @@ function AuthProvider({children}){
 
   const value = {
     CurrentUser,
+    Loading,
     SignIn,
     Login,
     LoginWithGoogle,
@@ -106,7 +110,7 @@ function AuthProvider({children}){
   return (
    <>
     <AuthContext.Provider value={value}>
-      {children}
+      {!Loading && children}
     </AuthContext.Provider>
    </>
   )
