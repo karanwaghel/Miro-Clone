@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/ComponentProject/AuthContext/Auth";
+import { useAuth } from "@/ComponentProject/AuthContext/Context";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

@@ -96,6 +96,12 @@ function AuthProvider({children}){
 };
 
 
+
+// Canvas States
+
+const [Tool, setTool] = useState("");
+
+
   const value = {
     CurrentUser,
     Loading,

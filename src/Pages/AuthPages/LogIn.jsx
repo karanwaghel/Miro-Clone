@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger} from "@radix-ui/react-dialog";
 import {
   Card,
   CardContent,
@@ -12,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "@/ComponentProject/AuthContext/Auth";
+import { useAuth } from "@/ComponentProject/AuthContext/Context";
 import { toast } from "sonner";
 import { commonSchema } from "@/ComponentProject/schemas/authschema";
 import { useForm } from "react-hook-form";
