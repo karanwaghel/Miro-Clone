@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
-import { useAuth } from "@/ComponentProject/AuthContext/Context";
+import { useAuth } from "@/ComponentProject/Context/AuthContext";
 import { useForm } from "react-hook-form";
 import { ForgotPasswordSchema } from "@/ComponentProject/schemas/authschema";
 import { zodResolver } from "@hookform/resolvers/zod";

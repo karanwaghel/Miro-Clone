@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/ComponentProject/AuthContext/Context";
+import { useAuth } from "@/ComponentProject/Context/AuthContext";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,11 +27,6 @@ function SignIn() {
   } = useForm({resolver:zodResolver(commonSchema)});
   const nav = useNavigate();
 
-  useEffect(() => {
-    if (CurrentUser) {
-      nav("/");
-    }
-  }, [CurrentUser]);
 
   const FormSubmit = async (data) => {
     const toastId = toast.loading("Signing in...");

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export default function LoadingSpinner() {
   return (
     <div className=" h-screen w-screen flex justify-center items-center">
-      <Button diabled >
+      <Button  >
         <Spinner className="size-8"  data-icon="inline-start"/>
         Loading...
       </Button>

@@ -11,14 +11,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "@/ComponentProject/AuthContext/Context";
+import { useAuth } from "@/ComponentProject/Context/AuthContext";
 import { toast } from "sonner";
 import { commonSchema } from "@/ComponentProject/schemas/authschema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import LoadingSpinner from "./Spinner";
 
 function LogInPage() {
-  const { Login, LoginWithGoogle,getFirebaseErrorMessage} = useAuth();
+  const { Login, LoginWithGoogle,getFirebaseErrorMessage,Loading} = useAuth();
   const {register,handleSubmit,formState:{errors}} = useForm({resolver:zodResolver(commonSchema)})
   const nav = useNavigate();
 
@@ -30,7 +31,6 @@ function LogInPage() {
       toast.success("Logged in Successfully!", {
         id: toastId,  
       });
-      nav("/");
     } catch (err) {
       console.log(err.code)
       toast.error(getFirebaseErrorMessage(err), {
@@ -43,14 +43,13 @@ function LogInPage() {
     
     try {
       await LoginWithGoogle();
-      nav("/");
     } catch (err) {
       toast.error("Google login failed")
     }
   };
 
   return (
-    <>
+    <>  
       <div className=" h-screen flex justify-center items-center">
         <Card className="max-w-xl min-w-[520px]">
           <CardHeader className="flex-row items-start">
@@ -97,13 +96,13 @@ function LogInPage() {
                 )
                 
               }
-              <Button className="w-full mt-5" type="submit">
+              <Button className="w-full mt-5 shadow-md" type="submit">
                 Login
               </Button>
             </form>
           </CardContent>
           <CardFooter className="flex flex-col gap-5">
-            <Button className="w-full" variant="outline" onClick={GoogleLogin}>
+            <Button className="w-full shadow-md" variant="outline" onClick={GoogleLogin} >
               Login with Google
             </Button>
           </CardFooter>

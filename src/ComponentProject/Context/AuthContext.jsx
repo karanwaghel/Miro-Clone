@@ -2,11 +2,11 @@ import {createContext, useContext, useEffect, useState } from "react";
 import {auth, GoogleProvider } from "../config/firebase";
 import {
   createUserWithEmailAndPassword,
-  signInWithPopup,
   signOut,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  signInWithPopup,
 } from "firebase/auth";
 
 
@@ -30,7 +30,6 @@ function AuthProvider({children}){
       return Unsubscribe;
     
   },[])
-
 
 
   const handleForgotPassword = async({email})=>{
@@ -66,6 +65,7 @@ function AuthProvider({children}){
     }
   }
 
+
   const LogOut =()=>{
     return signOut(auth)
   }
@@ -97,11 +97,6 @@ function AuthProvider({children}){
 
 
 
-// Canvas States
-
-const [Tool, setTool] = useState("");
-
-
   const value = {
     CurrentUser,
     Loading,
@@ -110,13 +105,13 @@ const [Tool, setTool] = useState("");
     LoginWithGoogle,
     LogOut,
     getFirebaseErrorMessage,
-    handleForgotPassword
+    handleForgotPassword,
   }
 
   return (
    <>
     <AuthContext.Provider value={value}>
-      {!Loading && children}
+      {children}
     </AuthContext.Provider>
    </>
   )

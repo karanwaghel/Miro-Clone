@@ -1,28 +1,62 @@
-import { Pen, EraserIcon, Menu, Share2,Square,Diamond,Circle,MoveRight,Minus,ALargeSmall,MousePointer } from "lucide-react";
+import {
+  Pen,
+  EraserIcon,
+  Menu,
+  Share2,
+  Square,
+  Diamond,
+  Circle,
+  MoveRight,
+  Minus,
+  ALargeSmall,
+  MousePointer,
+  LogOut as LogOutIcon
+  
+} from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useWhiteBoard } from "@/ComponentProject/Context/DashBoardContext";
+import { useAuth } from "@/ComponentProject/Context/AuthContext";
 
-export default function Toolbar({Tool,setTool}) {
+export default function Toolbar() {
 
-  const handletoolSelection =(value)=>{
-    if(value){
-      setTool(value)
+
+  const { setTool } = useWhiteBoard();
+  const {LogOut}= useAuth();
+
+  const handletoolSelection = (value) => {
+  if (value) {
+      setTool(value);
     }
-  } 
+  };
+
+  const handelLogout = async () => {
+    try {
+      await LogOut();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="h-16 w-full p-4">
       <div className="flex justify-between">
-        <div className=" bg-blue-400 hover:bg-blue-500  active:border-2 border-blue-800 p-2 rounded-lg w-9 h-9 ">
-          <Menu size={16} className="w-full" />
+        <div className=" ">
+          <Button className="rounded-lg w-10">
+            <Menu size={16} />
+          </Button>
         </div>
-        <div className="border-2 border-gray-400 rounded-xl p-1">
-          <ToggleGroup type="single" spacing={3} defaultValue="pen" onValueChange={handletoolSelection}>
+        <div className="shadow-md shadow-[#414753] rounded-xl p-1">
+          <ToggleGroup
+            type="single"
+            defaultValue="pen"
+            onValueChange={handletoolSelection}
+          >
             <ToggleGroupItem value="pen">
               <Pen />
             </ToggleGroupItem>
             <ToggleGroupItem value="eraser">
-              <EraserIcon  />
+              <EraserIcon />
             </ToggleGroupItem>
             <ToggleGroupItem value="square">
               <Square />
@@ -43,14 +77,21 @@ export default function Toolbar({Tool,setTool}) {
               <ALargeSmall />
             </ToggleGroupItem>
             <ToggleGroupItem value="cursor">
-              <MousePointer /> 
+              <MousePointer />
             </ToggleGroupItem>
           </ToggleGroup>
         </div>
-        <div className="bg-blue-600 hover:bg-blue-700   p-2 rounded-lg w-9 h-9 ">
-          <Share2 size={20} color="white"/>
+        <div>
+          <Button className="rounded-lg">
+            <Share2 size={20}  />
+          </Button>
+           <Button onClick={handelLogout}>
+              <LogOutIcon/>
+           </Button>
         </div>
       </div>
     </div>
   );
 }
+
+
